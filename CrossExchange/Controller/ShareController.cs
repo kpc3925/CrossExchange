@@ -16,7 +16,7 @@ namespace CrossExchange.Controller
         }
 
         [HttpGet("{symbol}")]
-        public async Task<IActionResult> Get([FromRoute]string symbol)
+        public IActionResult Get([FromRoute]string symbol)
         {
             var shares = _shareRepository.Query().Where(x => x.Symbol.Equals(symbol)).ToList();
             return Ok(shares);

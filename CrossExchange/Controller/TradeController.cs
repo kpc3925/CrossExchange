@@ -25,7 +25,7 @@ namespace CrossExchange.Controller
 
 
         [HttpGet("{portfolioid}")]
-        public async Task<IActionResult> GetAllTradings([FromRoute]int portFolioid)
+        public IActionResult GetAllTradings([FromRoute]int portFolioid)
         {
             var trade = _tradeRepository.Query().Where(x => x.PortfolioId.Equals(portFolioid));
             return Ok(trade);
