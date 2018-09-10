@@ -1,0 +1,91 @@
+From d8e7446f2d58a39d5d886fbead8846506c324e52 Mon Sep 17 00:00:00 2001
+From: Edison Marindich <Edison.marindich@kpc.co.ke>
+Date: Sun, 9 Sep 2018 13:36:34 +0300
+Subject: [PATCH 1/2] Commit
+XOV: v1
+
+---
+ Readme.txt | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/Readme.txt b/Readme.txt
+index e8024b4..4198cd2 100644
+--- a/Readme.txt
++++ b/Readme.txt
+@@ -35,10 +35,10 @@ Tasks:
+         - Unit Tests
+ 
+     Prerequisites:
+-        GIT
+-        VS 2017(.NET Core 2.0)
+-        SQLServer 2012
+-        (Developer/Express Edition) 
++       	- GIT
++ 		- Any IDE
++ 		- .NET Core 2.0
++ 		- SQL Server 2012+
+ 
+ 
+    Development Environment:
+-- 
+2.18.0.windows.1
+
+
+From 20d9912c4cc1e59487ec8d1d96ab2fb18c93983c Mon Sep 17 00:00:00 2001
+From: Edison Marindich <Edison.marindich@kpc.co.ke>
+Date: Mon, 10 Sep 2018 14:10:15 +0300
+Subject: [PATCH 2/2] added await operator
+XOV: v1
+
+---
+ CrossExchange/Controller/PortfolioController.cs | 4 ++--
+ CrossExchange/Controller/ShareController.cs     | 2 +-
+ CrossExchange/Controller/TradeController.cs     | 2 +-
+ 3 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/CrossExchange/Controller/PortfolioController.cs b/CrossExchange/Controller/PortfolioController.cs
+index bf2f8d4..bc65848 100644
+--- a/CrossExchange/Controller/PortfolioController.cs
++++ b/CrossExchange/Controller/PortfolioController.cs
+@@ -15,10 +15,10 @@ namespace CrossExchange.Controller
+         }
+ 
+         [HttpGet("{portFolioid}")]
+-        public async Task<IActionResult> GetPortfolioInfo([FromRoute]int portFolioid)
++        public IActionResult GetPortfolioInfo([FromRoute]int portFolioid)
+         {
+             var portfolio = _portfolioRepository.GetAll().Where(x => x.Id.Equals(portFolioid));
+-            
++
+             return Ok(portfolio);
+         }
+ 
+diff --git a/CrossExchange/Controller/ShareController.cs b/CrossExchange/Controller/ShareController.cs
+index 8ff4227..4b06772 100644
+--- a/CrossExchange/Controller/ShareController.cs
++++ b/CrossExchange/Controller/ShareController.cs
+@@ -16,7 +16,7 @@ namespace CrossExchange.Controller
+         }
+ 
+         [HttpGet("{symbol}")]
+-        public async Task<IActionResult> Get([FromRoute]string symbol)
++        public IActionResult Get([FromRoute]string symbol)
+         {
+             var shares = _shareRepository.Query().Where(x => x.Symbol.Equals(symbol)).ToList();
+             return Ok(shares);
+diff --git a/CrossExchange/Controller/TradeController.cs b/CrossExchange/Controller/TradeController.cs
+index 3b51c75..7b39e19 100644
+--- a/CrossExchange/Controller/TradeController.cs
++++ b/CrossExchange/Controller/TradeController.cs
+@@ -25,7 +25,7 @@ namespace CrossExchange.Controller
+ 
+ 
+         [HttpGet("{portfolioid}")]
+-        public async Task<IActionResult> GetAllTradings([FromRoute]int portFolioid)
++        public IActionResult GetAllTradings([FromRoute]int portFolioid)
+         {
+             var trade = _tradeRepository.Query().Where(x => x.PortfolioId.Equals(portFolioid));
+             return Ok(trade);
+-- 
+2.18.0.windows.1
+
